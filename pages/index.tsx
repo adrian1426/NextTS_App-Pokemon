@@ -1,6 +1,7 @@
 import { Layout } from "@/layouts";
 import { Button } from "@nextui-org/react";
 import { GetStaticProps } from "next";
+import pokemonApi from "@/apis/pokemonApi";
 
 export default function Home(props) {
 
@@ -14,11 +15,12 @@ export default function Home(props) {
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  console.log('en funcion staticpropps')
+
+  const resApi = await pokemonApi.get('/pokemon?limit=151');
 
   return {
     props: {
-
+      pokemons: resApi.data.results
     }
   }
 };
