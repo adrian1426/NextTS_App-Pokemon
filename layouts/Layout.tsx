@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { Navbar } from "@/components/ui";
 
 interface ILayoutProps {
   title?: string;
@@ -18,9 +19,11 @@ const Layout = (props: ILayoutProps) => {
         <meta name="keywords" content="pokemon,Adrian" />
       </Head>
 
-      {/* navbar */}
+      <Navbar />
 
-      <main>
+      <main style={{
+        padding: '0 20px'
+      }}>
         {children}
       </main>
     </>
