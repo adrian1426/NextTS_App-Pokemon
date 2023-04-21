@@ -1,5 +1,5 @@
 import { Layout } from "@/layouts";
-import { Button } from "@nextui-org/react";
+import { Card, Grid, Row, Text } from "@nextui-org/react";
 import { GetStaticProps } from "next";
 import pokemonApi from "@/apis/pokemonApi";
 import { PokemonResponse, Result } from "@/interfaces/pokemonInterface";
@@ -13,16 +13,31 @@ export default function Home(props: IHomeProps) {
 
   return (
     <Layout title="Listado de pokemones">
-      <Button color='gradient'>mi botón</Button>
-      <hr />
-
-      <ul>
+      <Grid.Container gap={2} justify="flex-start">
         {
           pokemons.map(pok => (
-            <li key={pok.id}>{`#${pok.id} - ${pok.name} - ${pok.img}`}</li>
+            // <li key={pok.id}>{`#${pok.id} - ${pok.name} - ${pok.img}`}</li>
+            <Grid key={pok.id} xs={6} sm={3} md={2} xl={1}>
+              <Card isHoverable isPressable>
+                <Card.Body css={{ p: 1 }}>
+                  <Card.Image
+                    src={pok.img}
+                    width='100%'
+                    height='140px'
+                  />
+                </Card.Body>
+
+                <Card.Footer>
+                  <Row justify="space-between">
+                    <Text transform="capitalize">{pok.name}</Text>
+                    <Text>#{pok.id}</Text>
+                  </Row>
+                </Card.Footer>
+              </Card>
+            </Grid>
           ))
         }
-      </ul>
+      </Grid.Container>
     </Layout>
   )
 }
