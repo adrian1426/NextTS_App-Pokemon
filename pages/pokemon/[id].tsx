@@ -3,6 +3,7 @@ import { PokemonDetail } from "@/interfaces/iPokemonDetail";
 import { Layout } from "@/layouts";
 import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 import { GetStaticPaths, GetStaticProps } from "next";
+import utilsLS from '../../utils/localStorage';
 
 interface Props {
   pokemon: PokemonDetail
@@ -11,8 +12,12 @@ interface Props {
 const PokemonDetailPage = (props: Props) => {
   const { pokemon } = props;
 
+  const onToggleFavorite = () => {
+    utilsLS.toggleFavoritePokemon(pokemon.id);
+  };
+
   return (
-    <Layout title="Algún pokemon" >
+    <Layout title={pokemon.name} >
       <Grid.Container
         css={{
           marginTop: '5px'
@@ -37,7 +42,11 @@ const PokemonDetailPage = (props: Props) => {
             <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
               <Text h1 transform="capitalize">{pokemon.name}</Text>
 
-              <Button color='gradient' ghost>
+              <Button
+                onClick={onToggleFavorite}
+                color='gradient'
+                ghost
+              >
                 Guardar en favoritos
               </Button>
             </Card.Header>
