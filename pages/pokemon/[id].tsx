@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import pokemonApi from "@/apis/pokemonApi";
 import { PokemonDetail } from "@/interfaces/iPokemonDetail";
 import { Layout } from "@/layouts";
@@ -10,11 +11,17 @@ interface Props {
 };
 
 const PokemonDetailPage = (props: Props) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const { pokemon } = props;
 
   const onToggleFavorite = () => {
+    setIsFavorite(!utilsLS.isFavoritePokemon(pokemon.id));
     utilsLS.toggleFavoritePokemon(pokemon.id);
   };
+
+  useEffect(() => {
+    setIsFavorite(utilsLS.isFavoritePokemon(pokemon.id));
+  }, [pokemon.id]);
 
   return (
     <Layout title={pokemon.name} >
@@ -45,9 +52,9 @@ const PokemonDetailPage = (props: Props) => {
               <Button
                 onClick={onToggleFavorite}
                 color='gradient'
-                ghost
+                ghost={!isFavorite}
               >
-                Guardar en favoritos
+                {isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
               </Button>
             </Card.Header>
 
