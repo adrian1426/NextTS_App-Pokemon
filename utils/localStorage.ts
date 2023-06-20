@@ -18,9 +18,16 @@ const isFavoritePokemon = (id: number): boolean => {
   return favorites.includes(id);
 }
 
+const pokemonsFavorites = (): number[] => {
+  let favorites: number[] = JSON.parse(localStorage.getItem(nameFavorites) || '[]');
+
+  return favorites;
+};
+
 const utilsLS = {
   toggleFavoritePokemon,
-  isFavoritePokemon
+  isFavoritePokemon,
+  pokemonsFavorites
 };
 
 export default utilsLS;
