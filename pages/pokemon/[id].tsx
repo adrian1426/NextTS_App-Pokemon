@@ -4,6 +4,7 @@ import { PokemonDetail } from "@/interfaces/iPokemonDetail";
 import { Layout } from "@/layouts";
 import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 import { GetStaticPaths, GetStaticProps } from "next";
+import confetti from 'canvas-confetti';
 import utilsLS from '../../utils/localStorage';
 
 interface Props {
@@ -15,6 +16,19 @@ const PokemonDetailPage = (props: Props) => {
   const { pokemon } = props;
 
   const onToggleFavorite = () => {
+    if (!isFavorite) {
+      confetti({
+        zIndex: 999,
+        particleCount: 150,
+        spread: 160,
+        angle: -100,
+        origin: {
+          x: 1,
+          y: 0
+        }
+      });
+    }
+
     setIsFavorite(!utilsLS.isFavoritePokemon(pokemon.id));
     utilsLS.toggleFavoritePokemon(pokemon.id);
   };
