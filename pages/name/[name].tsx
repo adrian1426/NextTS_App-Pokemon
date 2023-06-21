@@ -7,6 +7,7 @@ import { Button, Card, Container, Grid, Text, Image } from '@nextui-org/react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import confetti from 'canvas-confetti';
 import utilsLS from '@/utils/localStorage';
+import { getPokemonByNameOrId } from '@/utils/pokemonInfo';
 
 interface Props {
   pokemon: PokemonDetail
@@ -126,19 +127,8 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { params } = ctx;
-  const resApi = await pokemonApi.get<PokemonDetail>(`/pokemon/${params!.name}`);
 
-  const pokemon = {
-    id: resApi.data.id,
-    name: resApi.data.name,
-    sprites: resApi.data.sprites
-  }
-
-  return {
-    props: {
-      pokemon
-    }
-  }
+  return getPokemonByNameOrId(params?.name);
 };
 
 export default PokemonNamePage;

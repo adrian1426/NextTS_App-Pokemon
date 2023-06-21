@@ -11,7 +11,7 @@ const PokemonCard = (props: Props) => {
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/pokemon/${pokemon.id}`);
+    router.push(`/name/${pokemon.name}`);
   };
 
   return (
