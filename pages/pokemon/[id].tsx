@@ -123,10 +123,10 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { params } = ctx;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { id } = params as { id: string };
 
-  return getPokemonByNameOrId(params?.id);
+  return getPokemonByNameOrId(id);
 };
 
 export default PokemonDetailPage;
