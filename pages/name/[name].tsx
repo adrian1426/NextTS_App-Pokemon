@@ -121,7 +121,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     paths: resApi.data.results.map(pok => ({
       params: { name: pok.name }
     })),
-    fallback: false
+    fallback: 'blocking'
   };
 };
 

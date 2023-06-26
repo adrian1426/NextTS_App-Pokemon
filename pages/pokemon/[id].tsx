@@ -119,7 +119,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     paths: pokemones.map(id => ({
       params: { id }
     })),
-    fallback: false
+    fallback: 'blocking'
   };
 };
 
