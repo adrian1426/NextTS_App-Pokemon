@@ -13,6 +13,7 @@ export const getPokemonByNameOrId = async (value?: string) => {
   return {
     props: {
       pokemon
-    }
+    },
+    revalidate: 86400 //1 dia
   }
 };
